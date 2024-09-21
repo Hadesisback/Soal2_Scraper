@@ -1,3 +1,4 @@
+[![Yahoo Finance Scraper](https://github.com/Hadesisback/Soal2_Scraper/actions/workflows/go.yml/badge.svg)](https://github.com/Hadesisback/Soal2_Scraper/actions/workflows/go.yml)
 
 # Soal2 - Yahoo Finance Scraper 
 
