@@ -20,4 +20,4 @@ The scraper grabs the following data:
 All data is saved into the PostgreSQL database as defined in the config.yaml file.
 
 
-#### External script used, and can be accessed in http://febrian.me:8090/scrape to check the result on DB
+#### External script used, and can be accessed in http://febrian.me:8091/scrape to check the result on DB
