@@ -1,0 +1,36 @@
+name: Yahoo Finance Scraper
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  backend:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Create config.yaml for scraper
+        run: |
+          mkdir -p config
+          echo "database:" > config/config.yaml
+          echo "  host: \"${{ secrets.DB_HOST }}\"" >> config/config.yaml
+          echo "  user: \"${{ secrets.DB_USER }}\"" >> config/config.yaml
+          echo "  password: \"${{ secrets.DB_PASSWORD }}\"" >> config/config.yaml
+          echo "  dbname: \"${{ secrets.DB_NAME }}\"" >> config/config.yaml
+          echo "  port: ${DB_PORT}" >> config/config.yaml
+          echo "  sslmode: \"${{ secrets.DB_SSLMODE }}\"" >> config/config.yaml
+      
+      - name: Build Docker Image for REST API
+        run: |
+          docker build ./ -t scraper
+
+      - name: Stop and remove previous backend container
+        run: |
+          docker stop scraper || true
+          docker rm scraper || true
+      - name: Start REST API in Docker
+        run: |
+          docker run -d --name scraper --rm  scraper
