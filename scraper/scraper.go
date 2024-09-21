@@ -23,16 +23,16 @@ func ScrapeTopGainers() {
         gainer.Symbol = e.ChildText("td:nth-child(1) span:nth-child(1) div a span:nth-child(1)")
         gainer.Name = e.ChildText("td:nth-child(1) span:nth-child(1) div a span:nth-child(2)")
 
-        priceStr := e.ChildText("td:nth-child(2)")
+        priceStr := e.ChildText("td:nth-child(2) span:nth-child(1):nth-child(1) fin-streamer[data-field='regularMarketPrice']")
         gainer.Price, _ = strconv.ParseFloat(priceStr, 64)
 
         changeStr := e.ChildText("td:nth-child(3)")
         gainer.Change, _ = strconv.ParseFloat(changeStr, 64)
 
         percentStr := e.ChildText("td:nth-child(4)")
-        percentStr = percentStr[:len(percentStr)-1] // Remove % symbol
+        percentStr = percentStr[:len(percentStr)-1] 
         gainer.Percent, _ = strconv.ParseFloat(percentStr, 64)
-		fmt.Println(gainer.Price)
+		fmt.Println(priceStr)
         // Save to the database
         result := database.DB.Create(&gainer)
         if result.Error != nil {

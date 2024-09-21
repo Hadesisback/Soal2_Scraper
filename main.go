@@ -1,11 +1,11 @@
 package main
 
 import (
-    // "log"
+    "log"
     "scraper/database"
     "scraper/scraper"
 
-    // "github.com/robfig/cron/v3"
+    "github.com/robfig/cron/v3"
 )
 
 func main() {
@@ -13,19 +13,19 @@ func main() {
     database.InitDatabase()
 
     // Create a new cron scheduler
-    // c := cron.New()
+    c := cron.New()
 	scraper.ScrapeTopGainers()
     // Schedule the scraper to run every day at midnight
-    // _, err := c.AddFunc("@daily", scraper.ScrapeTopGainers)
-    // if err != nil {
-    //     log.Fatalf("Error scheduling job: %v", err)
-    // }
+    _, err := c.AddFunc("@daily", scraper.ScrapeTopGainers)
+    if err != nil {
+        log.Fatalf("Error scheduling job: %v", err)
+    }
 
-    // // Start the cron scheduler
-    // c.Start()
+    // Start the cron scheduler
+    c.Start()
 
-    // log.Println("Scheduler started. Scraping daily...")
+    log.Println("Scheduler started. Scraping daily...")
 
-    // // Block the main thread to keep the application running
-    // select {}
+    // Block the main thread to keep the application running
+    select {}
 }
