@@ -17,3 +17,6 @@ The scraper grabs the following data:
 #### Change Percent: How much the stock increased (in %)
 
 All data is saved into the PostgreSQL database as defined in the config.yaml file.
+
+
+#### External script used, and can be accessed in http://febrian.me:8090/scrape to check the result on DB
