@@ -33,4 +33,4 @@ jobs:
           docker rm scraper || true
       - name: Start REST API in Docker
         run: |
-          docker run -d --name scraper --rm  scraper
+          docker run -d --name scraper  scraper
